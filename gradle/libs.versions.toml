@@ -42,7 +42,7 @@ androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "an
 androidx-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androidx-swiperefreshlayout" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 drawer = "com.drakeet.drawer:drawer:1.0.3"
-jsoup = "org.jsoup:jsoup:1.16.1"
+jsoup = "org.jsoup:jsoup:1.16.2"
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 material = { module = "com.google.android.material:material", version.ref = "google-android-material" }
 
