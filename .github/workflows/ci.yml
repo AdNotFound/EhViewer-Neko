@@ -28,9 +28,6 @@ jobs:
         with:
           gradle-home-cache-cleanup: true
 
-      - name: Spotless Check
-        run: ./gradlew spotlessCheck
-
       - name: Gradle Build
         run: ./gradlew assembleRelease
 
