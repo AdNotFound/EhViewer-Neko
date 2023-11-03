@@ -66,16 +66,9 @@
     
     <Preference
        android:key="useragent"
-       android:title="@string/settings_advanced_custom_useragent"
+       android:title="@string/settings_advanced_custom_useragent_title"
+       android:summary="@string/settings_advanced_custom_useragent_summary"
        app:iconSpaceReserved="false">
-
-       <androidx.preference.widget.EditTextPreference
-           android:defaultValue=""
-           android:dialogTitle="@string/settings_advanced_custom_useragent_dialog_title"
-           android:hint="@string/settings_advanced_custom_useragent_hint"
-           android:inputType="text"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content" />
 
     <com.hippo.ehviewer.preference.ProxyPreference
         android:key="proxy"
