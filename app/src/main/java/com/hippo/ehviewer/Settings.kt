@@ -26,6 +26,7 @@ import com.hippo.glgallery.GalleryView
 import com.hippo.unifile.UniFile
 import com.hippo.yorozuya.NumberUtils
 import java.util.Locale
+import com.hippo.ehviewer.client.CHROME_USER_AGENT
 
 object Settings {
     /********************
@@ -169,6 +170,8 @@ object Settings {
     private const val DEFAULT_READ_CACHE_SIZE = 320
     const val KEY_APP_LANGUAGE = "app_language"
     private const val DEFAULT_APP_LANGUAGE = "system"
+    private const val KEY_USER_AGENT = "user_agent"
+    private const val DEFAULT_USER_AGENT = CHROME_USER_AGENT
     private const val KEY_PROXY_TYPE = "proxy_type"
     private const val DEFAULT_PROXY_TYPE = EhProxySelector.TYPE_SYSTEM
     private const val KEY_PROXY_IP = "proxy_ip"
@@ -639,13 +642,19 @@ object Settings {
     val appLanguage: String?
         get() = getString(KEY_APP_LANGUAGE, DEFAULT_APP_LANGUAGE)
 
+    val userAgent: String
+       get() = getString(KEY_USER_AGENT, DEFAULT_USER_AGENT)
+    fun putUserAgent(value: String) {
+       putString(KEY_USER_AGENT, value)
+    }
+
     val proxyType: Int
         get() = getInt(KEY_PROXY_TYPE, DEFAULT_PROXY_TYPE)
     fun putProxyType(value: Int) {
         putInt(KEY_PROXY_TYPE, value)
     }
 
-    val proxyIp: String?
+    val : String?
         get() = getString(KEY_PROXY_IP, DEFAULT_PROXY_IP)
     fun putProxyIp(value: String?) {
         putString(KEY_PROXY_IP, value)

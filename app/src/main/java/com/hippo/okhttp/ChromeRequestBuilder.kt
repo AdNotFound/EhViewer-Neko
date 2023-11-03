@@ -16,6 +16,7 @@
 package com.hippo.okhttp
 
 import okhttp3.Request
+import com.hippo.ehviewer.Settings.userAgent
 
 open class ChromeRequestBuilder(url: String) : Request.Builder() {
     companion object {
@@ -27,9 +28,15 @@ open class ChromeRequestBuilder(url: String) : Request.Builder() {
     }
 
     init {
-        this.url(url)
-        this.addHeader("User-Agent", CHROME_USER_AGENT)
-        this.addHeader("Accept", CHROME_ACCEPT)
-        this.addHeader("Accept-Language", CHROME_ACCEPT_LANGUAGE)
-    }
+       this.url(url)
+
+       if (customUserAgent != null) {
+           this.addHeader("User-Agent", userAgent)
+       } else {
+           this.addHeader("User-Agent", CHROME_USER_AGENT)
+       }
+
+       this.addHeader("Accept", CHROME_ACCEPT)
+       this.addHeader("Accept-Language", CHROME_ACCEPT_LANGUAGE)
+   }
 }
