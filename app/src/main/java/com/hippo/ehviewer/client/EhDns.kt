@@ -134,6 +134,10 @@ object EhDns : Dns {
     override fun lookup(hostname: String): List<InetAddress> {
         val dns = if (Settings.dOH) doh else Dns.SYSTEM
 
+        if (!Settings.builtInHosts) {
+            return dns.lookup(hostname)
+        }
+
         return hosts[hostname] ?: builtInHosts[hostname].takeIf { Settings.builtInHosts }
             ?: dns.lookup(hostname)
     }
