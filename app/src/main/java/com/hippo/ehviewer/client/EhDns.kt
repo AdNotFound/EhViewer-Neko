@@ -32,6 +32,7 @@ object EhDns : Dns {
     private val builtInHosts: MutableMap<String, List<InetAddress>> = mutableMapOf()
     private val appCache = Cache(File("cacheDir", "okhttpcache"), 5 * 1024 * 1024)
     private val bootstrapClient = OkHttpClient.Builder().cache(appCache).build()
+    private val dohCache: MutableMap<String, List<InetAddress>> = mutableMapOf()
 
     private val doh = DnsOverHttps.Builder().client(bootstrapClient)
         .url("https://45.11.45.11/dns-query".toHttpUrl())
@@ -64,12 +65,16 @@ object EhDns : Dns {
     override fun lookup(hostname: String): List<InetAddress> {
         val dns = if (Settings.dOH) doh else Dns.SYSTEM
 
-        if (!Settings.builtInHosts) {
-            return dns.lookup(hostname)
-        }
+        hosts[hostname]?.let { return it }
+        builtInHosts[hostname]?.takeIf { Settings.builtInHosts }?.let { return it }
 
-        return hosts[hostname] ?: builtInHosts[hostname].takeIf { Settings.builtInHosts }
-            ?: dns.lookup(hostname)
+        dohCache[hostname]?.let { return it }
+
+        val result = dns.lookup(hostname)
+        if (Settings.dOH) {
+            dohCache[hostname] = result
+        }
+        return result
     }
 
     fun isInHosts(hostname: String): Boolean {
